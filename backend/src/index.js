@@ -2,6 +2,8 @@ const express = require("express");
 const env = require("dotenv");
 const connectDB = require("./db/connection");
 const UserRoutes = require("./routes/User");
+const AdminRoutes = require('./routes/Admin');
+
 const {serverErrorHandler} = require('./middlewares/serverErrorHandler');
 //express initialization
 const app = express();
@@ -14,6 +16,7 @@ app.use(express.json());
 
 //routes
 app.use("/api/user", UserRoutes);
+app.use('/api/admin',AdminRoutes);
 
 
 app.use(serverErrorHandler);
