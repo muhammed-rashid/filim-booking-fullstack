@@ -2,6 +2,7 @@ const District = require("../models/District");
 module.exports.districtHelper = {
   //create new district
   store:(data)=>{
+    
     return new Promise((resolve,reject)=>{
         _district = new District();
         _district.name =data.name;

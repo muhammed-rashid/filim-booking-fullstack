@@ -8,6 +8,8 @@ module.exports.districtController = {
   create: async (req, res,next) => {
     try {
       let district = await districtHelper.store(req.body);
+
+      
       return res.status(200).json({
         success: true,
         message: "New District Added successfully",

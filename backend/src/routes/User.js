@@ -10,5 +10,8 @@ router.post('/sign-in',loginRequests,validationRequest,UserController.login);
 router.post('/welcome',userAuth,(req,res)=>{
     res.send(req.user)
 });
+router.get("/", (req, res) =>{
+    res.send("hello")
+})
 
 module.exports = router;
