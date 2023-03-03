@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
-const teatorSchema = mongoose.Schema({
+const theaterSchema = mongoose.Schema({
     name:{
+        
         required:true,
         type:String,
         trim:true
@@ -10,8 +11,9 @@ const teatorSchema = mongoose.Schema({
     },
     slots:[
         {
-
+           "a":String,
+           "b": String
         }
     ]
 });
-module.exports = mongoose.model("Teator",teatorSchema);
+module.exports = mongoose.model("Theater",theaterSchema);

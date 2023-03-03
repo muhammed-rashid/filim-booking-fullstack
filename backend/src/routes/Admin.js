@@ -9,7 +9,7 @@ const adminAuth = require("../middlewares/adminAuth");
 //controllers
 const authController = require('../controllers/Admin/authController')
 const {dashboardController} = require('../controllers/Admin/dashboardController');
-const {teatorController} = require('../controllers/Admin/teatorController.js')
+const {theaterController} = require('../controllers/Admin/theaterController.js')
 
 router.post('/sign-up',adminSignUpRequest,validationRequest,authController.signUp);
 router.post('/sign-in',adminSignInRequest,validationRequest,authController.signIn);
@@ -22,12 +22,14 @@ router.post('/district/store',adminAuth,districtCreateRequest,validationRequest,
 router.post('/district/update',adminAuth,districtUpdateRequest,validationRequest,districtController.update)
 router.post('/district/:id',adminAuth,districtController.show);
 router.delete('/district/:id',adminAuth,districtController.delete);
-// router.get('/teator', (req, res) =>{
+// router.get('/theater', (req, res) =>{
 //     console.log("GET WORKING");
 //     res.send("work it")
 // })
-router.post('/teator/create', teatorController.create)
-router.get('/teator', teatorController.getTeator )
+router.post('/theater/create', theaterController.create)
+router.post('/theater/delete', theaterController.delet)
+router.post('/theater/update', theaterController.update)
+router.get('/theater', theaterController.getTheater )
 
 
 module.exports = router;
