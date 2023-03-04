@@ -3,6 +3,7 @@ const router = express.Router();
 const {adminSignUpRequest} = require('../Requests/admin/signUpRequest');
 const {adminSignInRequest} = require('../Requests/admin/signInRequest');
 const {districtCreateRequest,districtUpdateRequest} = require('../Requests/admin/districtRequest');
+const {theaterCreateRequest,theaterUpdateRequest} = require('../Requests/admin/theaterRequest');
 const validationRequest = require('../middlewares/validationErrors');
 const {districtController} = require('../controllers/Admin/districtController')
 const adminAuth = require("../middlewares/adminAuth");
@@ -22,14 +23,12 @@ router.post('/district/store',adminAuth,districtCreateRequest,validationRequest,
 router.post('/district/update',adminAuth,districtUpdateRequest,validationRequest,districtController.update)
 router.post('/district/:id',adminAuth,districtController.show);
 router.delete('/district/:id',adminAuth,districtController.delete);
-// router.get('/theater', (req, res) =>{
-//     console.log("GET WORKING");
-//     res.send("work it")
-// })
-router.post('/theater/create', theaterController.create)
-router.post('/theater/delete', theaterController.delet)
-router.post('/theater/update', theaterController.update)
-router.get('/theater', theaterController.getTheater )
+//teater
+router.post('/theater/create',adminAuth,theaterCreateRequest,validationRequest, theaterController.create)
+router.get('/theater/:id',adminAuth,theaterController.show)
+router.post('/theater/update',adminAuth,theaterUpdateRequest,validationRequest, theaterController.update)
+router.post('/theater/delete',adminAuth, theaterController.delete)
+router.get('/theaters',adminAuth, theaterController.getTheater )
 
 
 module.exports = router;

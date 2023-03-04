@@ -4,13 +4,9 @@ const { theaterHelper } = require('../../helpers/theaterHelper')
 module.exports.theaterController = {
 
     create:  (req, res, next) => {
-        console.log("CONTROLLER WORKING");
-
         try {
-            console.log(" TRY WORKING");
-
+        
             theaterHelper.create(req.body).then((theater) => {
-                console.log("CREATED DATA IS " , theater);
                 return res.status(200).json({
                     success: true,
                     message: "New theater Added successfully",
@@ -19,46 +15,61 @@ module.exports.theaterController = {
             })
 
         } catch (error) {
-
+            next(error)
         }
 
     },
 
-    getTheater:  (req, res) => {
+    //find one theator
+    show:async(req,res,next)=>{
+        let theater = await theaterHelper.findById(req.params.id);
+        if(theater){
+          return res.status(200).json({
+            success:true,
+            data:theater
+          })
+        }
+        next("theator Not found");
+      },
+    
 
-         theaterHelper.getAll().then((theaters) => {
-
-            console.log("GET DATAS ARE:", theaters);
-            res.status(200).json(theaters)
-        })
+    getTheater:  (req, res,next) => {
         try {
+            theaterHelper.getAll().then((data) => {
+                res.status(200).json({
+                    success:true,
+                    message:"Theaters found",
+                    data:data
+                })
+            })
 
         } catch (error) {
-
+            next(error)
         }
 
     },
-    update : (req,res) => {
+    update : (req,res,next) => {
 
         theaterHelper.updateTheater(req.body).then((result) =>{
-
              return res.status(200).json({
                 success:true,
                 message:"Theater updated successfully",
                 data:result
               });
+        }).catch(err=>{
+            next(err)
         })
 
     },
-
-    delet : (req, res) => {
-
+    //delete theator
+    delete : (req, res,next) => {
         theaterHelper.deleteTheater(req.body).then((result) => {
-
             return res.status(200).json({
                 success:true,
                 message:"Theater deleted successfully"
               });
+        }).catch(err=>{
+            next(err)
         })
 
     }

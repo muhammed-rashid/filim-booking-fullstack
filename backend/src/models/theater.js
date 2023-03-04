@@ -7,12 +7,13 @@ const theaterSchema = mongoose.Schema({
         trim:true
     },
     districtId:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'District'
     },
     slots:[
         {
-           "a":String,
-           "b": String
+           "name":String,
+           "time": String
         }
     ]
 });
