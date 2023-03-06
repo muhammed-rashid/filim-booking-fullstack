@@ -24,7 +24,7 @@ module.exports.districtHelper = {
     })
   },
   update:(district)=>{
-    console.log(district)
+
     return new Promise((resolve,reject)=>{
       District.findOneAndUpdate({_id:district.districtId},{name:district.name},{new:true},(err,result)=>{
         if(!err){

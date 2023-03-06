@@ -4,6 +4,7 @@ const {adminSignUpRequest} = require('../Requests/admin/signUpRequest');
 const {adminSignInRequest} = require('../Requests/admin/signInRequest');
 const {districtCreateRequest,districtUpdateRequest} = require('../Requests/admin/districtRequest');
 const {theaterCreateRequest,theaterUpdateRequest} = require('../Requests/admin/theaterRequest');
+const {screenCreateRequest,screenUpdateRequest} = require('../Requests/admin/screenRequest');
 const validationRequest = require('../middlewares/validationErrors');
 const {districtController} = require('../controllers/Admin/districtController')
 const adminAuth = require("../middlewares/adminAuth");
@@ -11,6 +12,7 @@ const adminAuth = require("../middlewares/adminAuth");
 const authController = require('../controllers/Admin/authController')
 const {dashboardController} = require('../controllers/Admin/dashboardController');
 const {theaterController} = require('../controllers/Admin/theaterController.js')
+const {screenController} = require('../controllers/Admin/screensController');
 
 router.post('/sign-up',adminSignUpRequest,validationRequest,authController.signUp);
 router.post('/sign-in',adminSignInRequest,validationRequest,authController.signIn);
@@ -29,6 +31,13 @@ router.get('/theater/:id',adminAuth,theaterController.show)
 router.post('/theater/update',adminAuth,theaterUpdateRequest,validationRequest, theaterController.update)
 router.post('/theater/delete',adminAuth, theaterController.delete)
 router.get('/theaters',adminAuth, theaterController.getTheater )
+
+//screens
+router.get('/screens',screenController.getAll)
+router.get('/screen/:id',screenController.show)
+router.post('/screen/create',adminAuth,screenCreateRequest,validationRequest,screenController.create)
+router.post('/screen/update',adminAuth,screenUpdateRequest,validationRequest,screenController.update)
+router.post('/screen/:id',screenController.delete)
 
 
 module.exports = router;
