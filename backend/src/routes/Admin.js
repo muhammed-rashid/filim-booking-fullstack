@@ -13,6 +13,8 @@ const authController = require('../controllers/Admin/authController')
 const {dashboardController} = require('../controllers/Admin/dashboardController');
 const {theaterController} = require('../controllers/Admin/theaterController.js')
 const {screenController} = require('../controllers/Admin/screensController');
+const { filimController } = require('../controllers/Admin/filmController');
+const { filimCreateRequest } = require('../Requests/admin/filimRequest');
 
 router.post('/sign-up',adminSignUpRequest,validationRequest,authController.signUp);
 router.post('/sign-in',adminSignInRequest,validationRequest,authController.signIn);
@@ -38,6 +40,13 @@ router.get('/screen/:id',screenController.show)
 router.post('/screen/create',adminAuth,screenCreateRequest,validationRequest,screenController.create)
 router.post('/screen/update',adminAuth,screenUpdateRequest,validationRequest,screenController.update)
 router.post('/screen/:id',screenController.delete)
+
+// FILMS
+router.get('/filims/:id', filimController.show)
+router.get('/filims', filimController.getFilims)
+router.post('/filims/create', filimCreateRequest , validationRequest, filimController.create)
+router.post('/filims/update',filimCreateRequest,validationRequest, filimController.update)
+router.post('/filims/delete', filimController.delete)
 
 
 module.exports = router;
